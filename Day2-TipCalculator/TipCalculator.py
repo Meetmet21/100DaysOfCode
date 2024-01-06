@@ -21,4 +21,4 @@ total_w_tip = total + (total * tip_percentage)
 pay = round(total_w_tip / num_people, 2)
 
 # Print to stdout the result
-print(f"Each person should pay: ${pay}.")
+print(f"Each person should pay: ${pay:.2f}")

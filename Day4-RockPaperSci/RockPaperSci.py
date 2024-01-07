@@ -41,7 +41,8 @@ player = int(input("What do you choose? Type 0 for Rock, 1 for Paper, 2 for Scis
 # Check for wrong inputs
 if player >= 3 or player < 0:
     print("You have an invalid value choice!\n---")
-    
+    exit(1)
+
 # Print drawing of choice
 print(graphics[player])
 

@@ -38,6 +38,10 @@ graphics = [rock, paper, scissors]
 # Change str to int
 player = int(input("What do you choose? Type 0 for Rock, 1 for Paper, 2 for Scissors.\n"))
 
+# Check for wrong inputs
+if player >= 3 or player < 0:
+    print("You have an invalid value choice!\n---")
+    
 # Print drawing of choice
 print(graphics[player])
 
@@ -48,11 +52,8 @@ computer = random.randint(0,2)
 print(f"Computer choice:\n{graphics[computer]}")
 
 # Check win condition based on the numbers attributed to each choice
-# Check for wrong inputs
-if player >= 3 or player < 0:
-    print("You have an invalid value choice!\n---")
 # Cheeck for draw
-elif computer == player:
+if computer == player:
     print("This is a draw!\n---")
 # Rock beats Scissors
 elif player == 0 and computer == 2:

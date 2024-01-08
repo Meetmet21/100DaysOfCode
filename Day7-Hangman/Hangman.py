@@ -1,6 +1,16 @@
 import random # Random choice
+import os # to clear screen
+
 import Hangman_art # hangmans ascii art 
-import Hangman_word # English words
+import Hangman_words # English words
+
+# Clear stdout for windows and unix
+def clear():
+    # Check for windows
+    if os.name == 'nt':
+        os.system("cls")
+    else:
+        os.system("clear")
 
 # Select a random word from a user defined language
 def chooseWord():
@@ -9,7 +19,7 @@ def chooseWord():
     # List of words for two languages
     french_words = ["Papillon","Montagne", "Coccinelle","Renaissance","Tempéte",
                     "Girafe","Jardin","Cactus","Soleil","Piano"]
-    english_words = Hangman_word.word_list
+    english_words = Hangman_words.word_list
     # Choose a random word depending on user selection
     if language.lower() == "french":
         return random.choice(french_words).lower()
@@ -95,6 +105,8 @@ list_guessed_letters = []
 while True:
     # Ask for a letter
     letter = guess()
+    # Clear the screeb
+    clear()
     # Check if in word
     if check(letter, word, list_guessed_letters):
         # Add letter to guessed list
@@ -112,10 +124,9 @@ while True:
     else:
         # Remove 1 life
         loose += 1
-        # Display current blanks
-        print("".join(blanks_list))
         # Display current state in game
         print(f"You guessed {letter}, that's not in the word. [ - 1 life ]")
+        print("".join(blanks_list))
         # Display next state hangman: starts from index 1 
         print(hangman_pics[loose])
 

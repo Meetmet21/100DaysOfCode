@@ -39,6 +39,7 @@ password = ""
 
 # Build password from possibilities by shuffling list in place
 random.shuffle(password_options)
+
 # Change list to string
 password = "".join(char for char in password_options)
 

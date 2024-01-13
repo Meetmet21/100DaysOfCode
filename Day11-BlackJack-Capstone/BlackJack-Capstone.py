@@ -10,12 +10,12 @@
 ### Modules
 import random # random choice, int
 import re # retrieve integer value from string
-import ASCII_art # logo
+import ASCII_art # logo, template, and displayCards function
 import copy # deep copy lists
 
 # Variables
 # Contains all type of cards with the associated point
-cards = [str(val) + sign for val in range(1,13 + 1) for sign in ["C","S","D","H"]]
+cards = [str(val) + sign for val in range(1,10 + 1) for sign in ["C","S","D","H"]]
 # Data for each player
 money = 1000
 current_cards = None
@@ -106,22 +106,26 @@ while state_game:
 
     # Pull cards and show
     player["cards"] = chooseCards(2)
-    print(f"Your cards are {player['cards']}")
+    print(f"Your cards are:")
+    # Print ascii cards
+    print(ASCII_art.displayCards(player["cards"]))
 
     # Pull computer cards and show first
     # Here add player cards to function because same card game for player and computer
     computer["cards"] = chooseCards(2, player["cards"])
-    print(f"Computer's first card is: {computer['cards'][0]}")
+    print(f"Computer's first card is:")
+    # Display computer first card in ascii art
+    print(ASCII_art.displayCards(computer["cards"][0]))
 
     # Ask for bids
-    player["bid"] = int(input("How munch do you want to bid? (whole number only): "))
+    player["bid"] = int(input("How munch do you want to bid? (whole number only): $"))
     if player["bid"] > player["money"]:
-        print(f"You're bidding more than what you have! Your total cash is {player['money']}.")
-        player["bid"] = int(input("How munch do you want to bid? (whole number only): "))
+        print(f"You're bidding more than what you have! Your total cash is ${player['money']}.")
+        player["bid"] = int(input("How munch do you want to bid? (whole number only): $"))
     # Computer bid
     computer["bid"] = random.randint(5, computer["money"])
     # Display bid
-    print(f"The computer bid is: {computer['bid']} and your's is: {player['bid']}")
+    print(f"The computer bid is: ${computer['bid']} and your's is: ${player['bid']}")
 
     # Ask if another card for player
     answer = input("Tyoe 'y' to get another card, type 'n' to pass: ").lower()
@@ -133,8 +137,10 @@ while state_game:
     
     # Show winner for current party
     # Display both hands
-    print(f"Your final hand: {player['cards']}")
+    print(f"Your final hand:")
+    print(ASCII_art.displayCards(player["cards"]))
     print(f"Computer's final hand: {computer['cards']}")
+    print(ASCII_art.displayCards(computer["cards"]))
     # Compute score and select winner
     computer["score"] = scoreCards(computer["cards"])
     player["score"] = scoreCards(player["cards"])
@@ -143,16 +149,16 @@ while state_game:
         print("You lose!")
         player["money"], computer["money"] = bid(player, computer, "loose")
         # Display remaining money
-        print(f"You have now {player['money']} and the computer has {computer['money']}")
+        print(f"You have now ${player['money']} and the computer has ${computer['money']}")
     # TIE
     elif player["score"] == computer["score"]:
         print("It's a tie!")
-        print(f"You have now {player['money']} and the computer has {computer['money']}.")
+        print(f"You have now ${player['money']} and the computer has ${computer['money']}.")
     # Win player
     else:
         print("You win!")
         player["money"], computer["money"] = bid(player, computer, "win")
-        print(f"You have now {player['money']} and the computer has {computer['money']}.")
+        print(f"You have now ${player['money']} and the computer has ${computer['money']}.")
 
     # Check if out of money
     if computer["money"] <= 0:

@@ -64,9 +64,12 @@ while start:
     # Display score if not 0
     if score > 0:
         print(f"You're right! Current score: {score}.")
-        # B becomes A and B has to be selected
-        A = copy.deepcopy(B)
-        B = getPersonality()
+        # Keep right answer celebrity, generate another one remaining slot
+        if answer == 'A':
+            B = getPersonality()
+        else:
+            A = copy.deepcopy(B)
+            B = getPersonality()
     else:
         # Select random celebrities: data type is dict
         # Keys: "name", "follower_count", "description", "country"
@@ -75,7 +78,6 @@ while start:
 
     # Presnt to player the draws
     presentPersonality(A,B)
-    print(A["follower_count"], B["follower_count"])
     # Ask which has more follower
     answer = input("Who has more folloers? Type 'A' or 'B': ").upper()
     # Check if good answer¨

@@ -1,6 +1,6 @@
 ### Description
 # Draw a dot plot with random manner
-import turtle
+
 ### Modules
 import turtle as t
 import random as rd

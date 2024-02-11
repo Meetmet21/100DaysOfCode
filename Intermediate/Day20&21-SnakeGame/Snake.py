@@ -6,7 +6,7 @@ from turtle import Turtle
 
 # Variables
 # The segments shape ratio (20 * ratio) 20px by default
-RATIO = 0.5
+RATIO = 1
 # Distance between segments to not overlap
 DIST = 20 * RATIO
 # Number of segment at beginning
@@ -92,5 +92,21 @@ class Snake:
         for segment in self.body[1:]:
             if self.head.distance(segment.pos()) < 5:
                 return True
+
+    # Snake reset position
+    def reset(self):
+        # Remove snake images
+        for seg in self.body:
+            seg.goto(2000, 2000)
+        # Clear old snake
+        self.body.clear()
+        self.head.clear()
+        # Begin with 3 squares/snake segments
+        for square in range(N_SEG):
+            self.segment_build()
+        # The head os the snake
+        self.head = self.body[0]
+
+
 
 

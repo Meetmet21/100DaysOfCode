@@ -6,7 +6,7 @@ from turtle import Turtle
 from random import randint, choice
 # Variables
 # Food size ratio (default 20px)
-RATIO = 0.5
+RATIO = 1
 # Distance exclusion around border
 BORDER_EXCLUSION = 20
 
@@ -34,14 +34,14 @@ class Food:
         self.food.shapesize(stretch_wid=RATIO, stretch_len=RATIO, outline=1)
         # Set position randomly
         # Choose random x and y
-        x = randint(-1 * (self.width // 2) - BORDER_EXCLUSION, self.width // 2 + BORDER_EXCLUSION)
-        y = randint(-1 * (self.height // 2) - BORDER_EXCLUSION, self.height // 2 + BORDER_EXCLUSION)
+        x = randint(-1 * (self.width // 2) + BORDER_EXCLUSION, self.width // 2 - BORDER_EXCLUSION)
+        y = randint(-1 * (self.height // 2) + BORDER_EXCLUSION, self.height // 2 - BORDER_EXCLUSION)
         # Set coordinates to random coordinates
         self.food.goto(x, y)
 
     # Generate new food if food eaten
     def food_bitten(self, snake_head):
-        if self.food.distance(snake_head.pos()) < 10:
+        if self.food.distance(snake_head.pos()) < RATIO * 20:
             return True
 
     # New food instance

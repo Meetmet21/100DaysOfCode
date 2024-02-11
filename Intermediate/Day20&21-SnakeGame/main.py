@@ -21,8 +21,8 @@ import time
 # Initiate screen instance
 screen = Screen()
 # Screen height and width parameters
-HEIGHT = 500
-WIDTH = 500
+HEIGHT = 600
+WIDTH = 600
 screen.setup(WIDTH, HEIGHT)
 # Screen background
 screen.bgcolor("black")
@@ -53,14 +53,14 @@ while state:
     snake.move_body()
 
     # Collision with walls (width or height - 20 which is the head size)
-    if abs(snake.head.xcor()) > (WIDTH//2 - 20) or abs(snake.head.ycor()) > (HEIGHT//2 - 20):
-        scoreboard.game_over()
-        state = False
+    if abs(snake.head.xcor()) > (WIDTH//2) or abs(snake.head.ycor()) > (HEIGHT//2):
+        scoreboard.reset()
+        snake.reset()
 
     # Collision with tail
     if snake.tail_bitten():
-        scoreboard.game_over()
-        state = False
+        scoreboard.reset()
+        snake.reset()
 
     # Check collision with food and increase score
     if food.food_bitten(snake.head):

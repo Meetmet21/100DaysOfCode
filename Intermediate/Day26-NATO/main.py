@@ -1,19 +1,23 @@
-# DESCRIPTION
-# Use the NATO alphabet to spell words.
-
-# MODULES
 import pandas as pd
+from sys import exit
 
-# VARIABLES
-# Extract from csv data to pandas df
-alphabet = pd.read_csv("NATO-alphabet-start/nato_phonetic_alphabet.csv")
+# Read dataframe
+df = pd.read_csv("NATO-alphabet-start/nato_phonetic_alphabet.csv")
 
-# MAIN PROGRAM
-# From df to dictionary
-dict_alphabet = {value.letter: value.code for index, value in alphabet.iterrows()}
-# Ask user for a name or a word
-text = input("Give a name or a word to transform to NATO alphabet: ").upper()
-# Transform text to NATO alphabet
-nato = [dict_alphabet.get(letter) for letter in text]
-# Return nato code
-print(nato)
+# Df to dict
+natoo = {record.letter:record.code for index, record in df.iterrows()}
+
+# User defined word
+try:
+	word = str(input("Select a word to translate to NATOO code: "))
+except:
+	print("The given value should be a string containing one word.")
+	exit()
+
+# Map letters to NATOO code
+code = []
+for letter in word:
+	code.append(natoo.get(letter.upper()))
+
+print(code)
+

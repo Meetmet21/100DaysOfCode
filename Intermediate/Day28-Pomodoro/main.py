@@ -32,7 +32,7 @@ class Pomodoro:
 
         # Main content frame
         self.mainframe = ttk.Frame(root)
-        self.mainframe.grid(column=0, row=0, sticky="nwes")
+        self.mainframe.grid(column=0, row=0, sticky="NSEW")
 
         # Canvas widgets
         self.canvas = tk.Canvas(self.mainframe, width=220, height=240, bg=self.yellow)

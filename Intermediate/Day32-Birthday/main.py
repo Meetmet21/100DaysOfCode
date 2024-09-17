@@ -67,7 +67,7 @@ class MailBirthday(SMTP, datetime, json):
                     with open(file=letter, mode="r") as temp:
                         text = temp.read()
                         # Replace name placeholder
-                        text.replace("[NAME]", name)
+                        text = text.replace("[NAME]", name)
                 except FileNotFoundError:
                     print(f"The template file {letter} is missing from working directory.")
 
